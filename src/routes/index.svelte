@@ -23,8 +23,10 @@
         </video> 
   </div>
 
-	<style>
-		.home{
-			min-height: 100vh;
+	<style lang="scss">
+		body{
+			h1{
+				color: blue;
+			}
 		}
 	</style>
