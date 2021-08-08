@@ -1,15 +1,15 @@
 <script>
 	import Dots from '$lib/components/Dots.svelte'
 	
-	let wiggleA = 0.7
-	let wiggleB = 0.7
+	let wiggleA = .2
+	let wiggleB = 0.2
 	let heated = false
 	let thermA = 10
 	let thermB = 10
 
 		function heatUp(){
-      wiggleA = 1.5
-      wiggleB = 1.2
+      wiggleA = .5
+      wiggleB = .3
       heated = true
       thermA = 70
       thermB = 50
@@ -59,8 +59,7 @@
       <div class="substance-contain substance-a">
         <div class="dots-container">
           <div class="dots-circle">
-            <!-- svelte-ignore missing-declaration -->
-            <Dots fill={"orange"} wiggle={wiggleA} w={230} h={230} />
+            <Dots fill={"orange"} wiggle={wiggleA} w={230} h={230} r={15} style='margin-left:-.2rem; margin-top: -.2rem;' />
           </div>
         </div>
       </div>
@@ -94,7 +93,7 @@
       <div class="substance-contain substance-b">
         <div class="dots-container">
           <div class="dots-circle">
-            <Dots fill={"yellow"} wiggle={wiggleB} w={230} h={230} />
+            <Dots fill={"yellow"} wiggle={wiggleB} w={230} h={230} r={15} />
           </div>
         </div>
       </div>

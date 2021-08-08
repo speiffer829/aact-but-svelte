@@ -6,7 +6,8 @@
 	export let h = 228;
 	export let fill = 'blue';
 	export let wiggle = 4;
-	export let r = 30
+	export let r = 34
+	export let style;
 	let dots = []
 
 	function timeToMakeTheDots(){
@@ -15,7 +16,7 @@
       let newDot
       let i = 0
       
-      while(y < 400 + r){
+      while(y < w + r){
         newDot = {
           id: i,
           cx: x,
@@ -27,7 +28,7 @@
       dots = [...dots, newDot]
 
         
-        if(x + r * 2 > 400) {
+        if(x + r * 2 > w) {
           y+=r*2
           x=r
         }else{
@@ -41,9 +42,9 @@
 		onMount(() => timeToMakeTheDots())
 </script>
 
-<div>
+<div {style}>
     <div class="dot-container">
-      <svg width="{w}" height="{h}" viewBox="-20 -20 440 440" class="dots">
+      <svg width="{w}" height="{h}" viewBox="0 0 {w} {h}" class="dots">
         <defs>
           <radialGradient id="grad" cx="50%" cy="50%" r="50%" fx="80%" fy="80%">
             <stop offset="0%" style="stop-color: #eee; stop-opacity: 0.2;" />
