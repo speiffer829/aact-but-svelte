@@ -23,10 +23,10 @@
       ]
 
 		function pickAnswer(i){
-      if(this.answered !== true) this.chosen = i
+      if(answered !== true) chosen = i
     }
     function checkAnswer(){
-      this.answered = true
+      answered = true
     }
     function moveOn(){
       goto('/review/equation')
@@ -64,7 +64,7 @@
         </div>
 
         <button class="btn" on:click={answered === false ? checkAnswer : moveOn} disabled={chosen === null}>
-          { answered === true ? 'Continue &RightArrow;' : 'Submit Answer' }
+          { @html answered === true ? 'Continue &RightArrow;' : 'Submit Answer' }
         </button>
         
       </div>
