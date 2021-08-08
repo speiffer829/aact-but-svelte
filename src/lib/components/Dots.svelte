@@ -2,11 +2,11 @@
 	import Dot from '$lib/components/Dot.svelte'
 	import { onMount } from 'svelte'
 	
-	export let w = 228;
-	export let h = 228;
+	export let w = 100;
+	export let h = 100;
 	export let fill = 'blue';
-	export let wiggle = 4;
-	export let r = 34
+	export let wiggle = 0;
+	export let r = 100
 	export let style;
 	let dots = []
 

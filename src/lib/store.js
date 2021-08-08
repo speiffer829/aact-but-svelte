@@ -1,4 +1,7 @@
 import { writable, get, derived } from 'svelte/store'
+import { onMount } from 'svelte'
+
+// const initialVersion = Math.round(Math.random() * 1)
 
 export let materialArrs = writable([
 {
@@ -149,6 +152,8 @@ export let materialArrs = writable([
 		}
 	])
 
+export let version = writable(null)
+
 export let completedQs = writable(0)
 export let correctScore = writable(0)
 
@@ -201,10 +206,23 @@ export let equation = writable(
       }
     )
 export let equationIndex = writable(0)
-export let materials = writable([])
+export let materials = writable()
 
 
 //Getters 
 
 export const currentQ = derived(questionIndex, $questionIndex => get(questions)[$questionIndex])
 // export const currentE = derived(equationIndex, $equationIndex => get(equations)[$equationIndex]);
+
+
+//functions 
+async function setVersion() {
+	const newVersion = Math.round(Math.random() * 1);
+	const allMaterials = await get(materialArrs)
+
+	version.set(newVersion)
+	materials.set(allMaterials[newVersion]);
+	console.log( 'materials', get(materials) )
+}
+
+setVersion()

@@ -13,7 +13,6 @@
 	let finished = false;
 	let showSteps = []
 
-	console.log( currentStep )
 
 	onMount(() => showSteps = [$equation.steps[0]])
 

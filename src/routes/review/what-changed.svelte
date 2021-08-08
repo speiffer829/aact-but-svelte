@@ -11,14 +11,14 @@
           text: 'Substance A',
           fill: 'orange',
           correct: true,
-          wiggle: 1.5
+          wiggle: .5
         },
         {
           id: 2,
           text: 'Substance B',
           fill: 'yellow',
           correct: false,
-          wiggle: 1.2
+          wiggle: .2
         },
       ]
 
@@ -49,7 +49,7 @@
 						class="answer"
 						style={`pointerEvents: ${answered === true ? 'none' : 'auto'} `}>
 							<p class="text">{answer.text}</p>
-							<Dots fill={answer.fill} wiggle={answer.wiggle} w={150} h={150} r={40} />
+							<Dots fill={answer.fill} wiggle={answer.wiggle} w={150} h={150} r={15} />
 						</div>
 					{/each}
         </div>
@@ -72,6 +72,10 @@
   </div>
 
 <style lang="scss">
+
+  *:not(.page-title){
+    text-align: center;
+  }
   .container{
     max-width: 80rem;
     margin: 0 auto;
@@ -113,7 +117,7 @@
 
     .answer{
       min-height: 12.8rem;
-      box-shadow: 2px 2px 5px rgba(var(--dark), 0.5);
+      box-shadow: var(--shadow);
       cursor: pointer;
       
 
