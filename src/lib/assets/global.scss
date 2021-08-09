@@ -27,10 +27,16 @@
   --shadow: 0 3px 10px rgb(var(--darkRGB) / 25%)
 }
 
+
+.content{
+  text-align: left;
+}
+
 body{
   font-family: var(--font);
   letter-spacing: 0.0625em;
   margin: 0;
+  text-align: center;
   // min-height: 100vh;
   // min-height: -webkit-fill-available;
 }

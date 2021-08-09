@@ -1,7 +1,6 @@
 import { writable, get, derived } from 'svelte/store'
 import { onMount } from 'svelte'
 
-// const initialVersion = Math.round(Math.random() * 1)
 
 export let materialArrs = writable([
 {
@@ -222,7 +221,6 @@ async function setVersion() {
 
 	version.set(newVersion)
 	materials.set(allMaterials[newVersion]);
-	console.log( 'materials', get(materials) )
 }
 
 setVersion()
