@@ -14,18 +14,13 @@ export async function load({ page }){
 	import { materials } from '$lib/store'
 	import Dots from '$lib/components/Dots.svelte'
 	import { fade } from 'svelte/transition'
+
 	export let id;
+
 	let wiggle = .3
 	let extended = true
 	let heated = false
 
-	let test = getNumber()
-
-	async function getNumber() {
-		setTimeout(() => {
-			test = Math.floor(Math.random()*10)
-		}, 2000);
-	} 
 
 	$: material = $materials.materials.filter(m => m.id == id)[0]
 
@@ -33,6 +28,8 @@ export async function load({ page }){
 		heated = true;
 		wiggle = material.wiggle
 		extended = false
+
+		console.log('wiggle:', wiggle)
 	}
 </script>
 
@@ -40,12 +37,6 @@ export async function load({ page }){
 	<div class="color-half">
 		<div class="container">
 			<p class="page-title">APPLY YOUR KNOWLEDGE</p>
-
-			{#await test}
-				...Getting number
-			{:then num}
-				number is { num }
-			{ /await }
 
 			<div class="content">
 				<h2 class="material-name">{ material.text }</h2>
@@ -75,7 +66,6 @@ export async function load({ page }){
 						{:else}
 							<button class="btn heat-btn orange" on:click={ handleHeatUp }><span class="text">Heat Up</span> <img class="lil-flame" src="/flame-solid.svg" alt="flame"></button>
 						{/if}
-						<span>{ material.energy }.J</span>
 					</div>
 				</div>
 			</div>
@@ -125,4 +115,35 @@ export async function load({ page }){
 			padding: 0;
 		}
 	}
+
+	.stats{
+    width: 100%;
+    max-width: 44rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 0 1rem;
+    margin-top: 2rem;
+
+    .stat{
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+			justify-content: space-between;
+			padding: 0 0.3rem;
+      
+      &:last-of-type, &:nth-of-type(3){
+        padding-top: 1rem;
+      }
+
+      &:nth-of-type(odd){
+        border-right: 1px solid #fff;
+      }
+
+      p{
+        flex: 1 1 50%;
+        text-align: center;
+        margin: 0;
+      }
+    }
+  }
 </style>

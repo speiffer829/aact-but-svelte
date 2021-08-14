@@ -25,7 +25,7 @@ export let materialArrs = writable([
 					totalCost: 5200,
 					correctCost: true,
 					hintImg: 'sub-a.jpg',
-					wiggle: 1.2
+					wiggle: .6
 				},
 				{
 					id: 2,
@@ -44,7 +44,7 @@ export let materialArrs = writable([
 					totalCost: 5600,
 					correctCost: false,
 					hintImg: 'sub-b.jpg',
-					wiggle: 1.5
+					wiggle: .5
 				},
 				{
 					id: 3,

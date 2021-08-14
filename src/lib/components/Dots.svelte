@@ -10,6 +10,7 @@
 	export let style;
 	let dots = []
 
+
 	function timeToMakeTheDots(){
       let x = r;
       let y = r;

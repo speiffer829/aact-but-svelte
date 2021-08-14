@@ -19,7 +19,7 @@
       id="{`dot-${id}-${fill}`}"
 			style="">
     </path> -->
-
+{#key wiggle}
 	<circle {cx} {cy} {r} 
 	id={`dot-${id}-${fill}`}
 	fill={`url(#${fill})`}
@@ -38,3 +38,4 @@
 		--posSixY: ${(Math.floor(Math.random() * wiggle) - wiggle * 2) * (Math.random() < 0.5 ? -1 : 1)}px;`
 	} 
 	/>
+{/key}
