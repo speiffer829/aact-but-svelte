@@ -1,9 +1,22 @@
+<script context="module">
+  export const load = async ({ page }) => ({
+    props: {
+      key: page.path,
+    },
+  })
+</script>
+
 <script>
 	import '$lib/assets/global.scss'
+	import PageTrans from '$lib/components/PageTrans.svelte'
+
+	export let key
 </script>
 
 <div class="app">
-	<slot />
+	<PageTrans {key}>
+		<slot />
+	</PageTrans>
 </div>
 
 <style>
