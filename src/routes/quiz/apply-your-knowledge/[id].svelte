@@ -10,19 +10,25 @@ export async function load({ page }){
 </script>
 
 <script>
-	import '$lib/assets/flame-solid.svg'
 	import { materials } from '$lib/store'
 	import Dots from '$lib/components/Dots.svelte'
-	import { fade } from 'svelte/transition'
+	import { fade, fly, slide } from 'svelte/transition'
+	import { goto } from '$app/navigation'
 
 	export let id;
 
 	let wiggle = .3
 	let extended = true
 	let heated = false
+	let answerString = ''
+	let showHint = false
+	let wrong = false
+	let strike = 0
+	let inputEl;
 
 
 	$: material = $materials.materials.filter(m => m.id == id)[0]
+	$: jgOffset = answerString.length
 
 	function handleHeatUp() {
 		heated = true;
@@ -30,6 +36,25 @@ export async function load({ page }){
 		extended = false
 
 		console.log('wiggle:', wiggle)
+	}
+
+	function handleFormSubmit() {
+		if(answerString === 'yay' || answerString === material.heatCapacity){
+			materials.update(materials => {
+				let i = materials.materials.findIndex(material => material.id == id)
+				materials.materials[i].done = true
+				return materials
+			})
+			goto('/quiz/materials')
+		}else{
+			showHint = true
+			wrong = true
+			strike++
+		}
+	}
+
+	function handleInputClick() {
+		showHint = false;
 	}
 </script>
 
@@ -75,7 +100,47 @@ export async function load({ page }){
 	<!-- bigger half -->
 
 	<div class="bigger-half">
-		test
+		<div class="container">
+			<form class="material-form" on:submit|preventDefault={handleFormSubmit}>
+				<h2 class="instructions">Calculate the specific heat capacity.</h2>
+
+				{#if strike < 3}
+					<label>
+						<input bind:this={inputEl} type="text" bind:value={answerString} on:click={handleInputClick} class:wrong={showHint}>
+						{#if answerString.length}
+							<span class="appender" transition:fly={{ x: 70 }} style={`left: calc(${jgOffset}ch + 1rem)`}>J/g°C</span>
+						{/if}
+					</label>
+				{/if}
+
+				{#if showHint}
+					<div class="hint" transition:slide|local={{ duration: 500 }}>
+						{#if strike < 3}
+							<p><strong>HINT</strong></p>
+							<p>For Reference:</p>
+						{/if}
+
+						{#if strike === 1}
+							<img src="/firsthint.jpg" alt="Q = mcΔT">
+						{:else if strike === 2}
+							<img src={`/${material.hintImg}`} alt="Q = mcΔT">
+						{:else}
+							<p class="the-answer">The Answer is <strong>{ material.heatCapacity }J/g°C</strong></p>
+						{/if}
+					</div>
+				{/if}
+
+				{#if strike < 3}
+					<button type="submit" class="btn">Submit</button>
+				{:else}
+					<a href="/quiz/materials" class="btn">Continue &nbsp;&rarr;</a>
+				{/if}
+
+				
+				<p class="note">Note: Pay attention to significant figures when entering your answer!</p>
+			</form>
+
+		</div>
 	</div>
 </div>
 
@@ -83,6 +148,8 @@ export async function load({ page }){
 	.material{
 		min-height: 100vh;
 	}
+
+
 
 	h2{
 		text-align: center;
@@ -146,4 +213,78 @@ export async function load({ page }){
       }
     }
   }
+
+	.bigger-half{
+		text-align: left;
+
+		.container{
+			max-width: 60rem;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 100%;
+			height: 100%;
+		}
+
+		.btn{
+			margin-top: 2rem;
+		}
+
+		h2{
+			font-size: 1.5em;
+			text-align: left;
+		}
+
+		label{
+			position: relative;
+			display: block;
+
+			.appender{
+				font-size: 2rem;
+				padding: 1rem;
+				position: absolute;
+				left: 1rem;
+				top: 0;
+				color: var(--grey);
+				font-weight: 300;
+				pointer-events: none;
+				transition: left 250ms;
+			}
+		}
+		input{
+			font-size: 2rem;
+			padding: 1rem;
+			border: 2px solid var(--light);
+			width: 100%;
+			display: block;
+			color: var(--grey);
+
+			&:focus{
+				border-color: var(--green);
+				outline: var(--green);
+			}
+
+			&.wrong{
+				border: solid 2px var(--red);
+				outline: var(--red);
+			}
+		}
+	}
+
+	.note{
+		font-size: 1.3rem;
+		margin-top: 4rem;
+	}
+
+	.hint{
+		max-width: 35rem;
+	}
+
+	.the-answer{
+		font-size: 2rem;
+
+		strong{
+			color: var(--green);
+		}
+	}
 </style>

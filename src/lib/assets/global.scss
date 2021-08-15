@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
+
 :root{
   --light: #E5E5E5;
   --lightRGB: 229 229 229;
@@ -22,7 +24,7 @@
   --red: #EB5757;
   --redRGB: 235 87 87;
 
-  --font: "proxima-nova","Proxima Nova", sans-serif; 
+  --font: "Poppins","Proxima Nova", sans-serif; 
 
   --shadow: 0 3px 10px rgb(var(--darkRGB) / 25%)
 }
@@ -51,6 +53,8 @@ img{
 
 input{
   -webkit-appearance: none;
+  font-family: var(--font);
+  font-weight: 300;
 }
 
 button{

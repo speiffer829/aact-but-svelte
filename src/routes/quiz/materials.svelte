@@ -24,7 +24,7 @@
 		<div class="container">
 			<div class="material-grid">
 				{#each theMaterials as material}
-					<div class="box" on:click={goto(`/quiz/apply-your-knowledge/${material.id}`)}>
+					<div class="box" class:done={material.done} on:click={goto(`/quiz/apply-your-knowledge/${material.id}`)}>
 						<p class="text">{ material?.text }</p>
 						<Dots w={200} h={200} r={material.done === true ? 20 : 100} fill={ material.fill } wiggle={material.done === true ? material.wiggle : 0} />
 					</div>
@@ -65,6 +65,7 @@
 
     &.done{
       opacity: 0.6;
+      pointer-events: none;
     }
     
 

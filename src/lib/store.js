@@ -93,7 +93,7 @@ export let materialArrs = writable([
 					done: false,
 					equationIndex: 0,
 					hintImg: 'vibranium-hint.jpg',
-					wiggle: 2.3
+					wiggle: .6
 				},
 				{
 					id: 2,
