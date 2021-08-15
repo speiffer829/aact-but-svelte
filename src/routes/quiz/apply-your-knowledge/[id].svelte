@@ -39,7 +39,7 @@ export async function load({ page }){
 	}
 
 	function handleFormSubmit() {
-		if(answerString === 'yay' || answerString === material.heatCapacity){
+		if(answerString === 'yay' || answerString === `${material.heatCapacity}`){
 			materials.update(materials => {
 				let i = materials.materials.findIndex(material => material.id == id)
 				materials.materials[i].done = true
@@ -68,7 +68,9 @@ export async function load({ page }){
 
 
 				<div class="dot-circle">
-					<Dots w={310} h={300} r={18} bind:wiggle fill={material.fill} />
+					
+					<Dots w={310} h={310} r={18} bind:wiggle fill={material.fill} />
+					
 				</div>
 
 				<div class="stats">
@@ -108,7 +110,7 @@ export async function load({ page }){
 					<label>
 						<input bind:this={inputEl} type="text" bind:value={answerString} on:click={handleInputClick} class:wrong={showHint}>
 						{#if answerString.length}
-							<span class="appender" transition:fly={{ x: 70 }} style={`left: calc(${jgOffset}ch + 1rem)`}>J/g°C</span>
+							<span class="appender" transition:fly|local={{ x: 70 }} style={`left: calc(${jgOffset}ch + 1rem)`}>J/g°C</span>
 						{/if}
 					</label>
 				{/if}
@@ -131,7 +133,7 @@ export async function load({ page }){
 				{/if}
 
 				{#if strike < 3}
-					<button type="submit" class="btn">Submit</button>
+					<button type="submit" class="btn" disabled={showHint || !answerString}>Submit</button>
 				{:else}
 					<a href="/quiz/materials" class="btn">Continue &nbsp;&rarr;</a>
 				{/if}

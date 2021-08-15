@@ -7,6 +7,7 @@
 	export let fill = 'blue';
 	export let wiggle = 0;
 	export let r = 100
+  export let gutter = false
 	export let style;
 	let dots = []
 
@@ -45,7 +46,8 @@
 
 <div {style}>
     <div class="dot-container">
-      <svg width="{w}" height="{h}" viewBox="0 0 {w} {h}" class="dots">
+      <svg width="{w}" height="{h}" 
+        viewBox="{gutter ? -1 * (w * .045) : 0} {gutter ? -1 * (w * .045) : 0} {gutter ? w + (w * .09) : w} {gutter ? h + (h * .09) : h}" class="dots">
         <defs>
           <radialGradient id="grad" cx="50%" cy="50%" r="50%" fx="80%" fy="80%">
             <stop offset="0%" style="stop-color: #eee; stop-opacity: 0.2;" />

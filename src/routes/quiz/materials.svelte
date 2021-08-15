@@ -26,7 +26,12 @@
 				{#each theMaterials as material}
 					<div class="box" class:done={material.done} on:click={goto(`/quiz/apply-your-knowledge/${material.id}`)}>
 						<p class="text">{ material?.text }</p>
-						<Dots w={200} h={200} r={material.done === true ? 20 : 100} fill={ material.fill } wiggle={material.done === true ? material.wiggle : 0} />
+						<Dots w={200} 
+                  h={200} 
+                  r={material.done === true ? 20 : 100} 
+                  fill={ material.fill } 
+                  wiggle={material.done === true ? material.wiggle : 0}
+                  gutter={true} />
 					</div>
 				{/each}
 			</div>
