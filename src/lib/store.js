@@ -213,6 +213,11 @@ export let materials = writable()
 export const currentQ = derived(questionIndex, $questionIndex => get(questions)[$questionIndex])
 // export const currentE = derived(equationIndex, $equationIndex => get(equations)[$equationIndex]);
 
+export const allDone = derived(
+	materials,
+	($materials) =>
+		$materials.materials.filter((m) => m.done === true).length === $materials.materials.length
+);
 
 //functions 
 async function setVersion() {

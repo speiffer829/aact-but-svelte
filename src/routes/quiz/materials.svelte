@@ -1,5 +1,5 @@
 <script>
-	import { materials } from '$lib/store'
+	import { materials, allDone } from '$lib/store'
 	import Dots from '$lib/components/Dots.svelte'
 	import { goto } from '$app/navigation'
 
@@ -13,9 +13,14 @@
 			<p class="page-title">APPLY YOUR KNOWLEDGE</p>
 
 			<div class="content">
-				<h2>Building A New Home</h2>
-				<p>You will be testing the specific heat capacity of four sample materials to determine which ones you could use.</p>
-				<p>The building materials you choose should have a heat capacity of at least 1.8 J/g°C.</p>
+        {#if !$allDone}
+          <h2>Building A New Home</h2>
+          <p>You will be testing the specific heat capacity of four sample materials to determine which ones you could use.</p>
+          <p>The building materials you choose should have a heat capacity of at least 1.8 J/g°C.</p>
+        {:else}
+          <h2>Are you up for a real-world challenge?</h2>
+          <a href="/quiz/greater-than" class="btn">Continue &nbsp;&rarr;</a>
+        {/if}
 			</div>
 		</div>
 	</div>

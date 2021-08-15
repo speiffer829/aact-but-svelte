@@ -47,9 +47,18 @@ export async function load({ page }){
 			})
 			goto('/quiz/materials')
 		}else{
+			inputEl.blur()
 			showHint = true
 			wrong = true
 			strike++
+
+			if(strike <= 3){
+				materials.update(materials => {
+					let i = materials.materials.findIndex(material => material.id == id)
+					materials.materials[i].done = true
+					return materials
+				})
+			}
 		}
 	}
 
