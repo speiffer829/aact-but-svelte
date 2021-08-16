@@ -135,6 +135,12 @@ button{
   color: var(--grey);
 }
 
+.full-width{
+		max-width: 69rem;
+    margin: 0 auto;
+    padding: 3rem;
+}
+
 
 .split-screen{
   display: flex;
@@ -284,6 +290,7 @@ button{
         flex: 1 1 15rem;
         border: solid 2px transparent;
         position: relative;
+        border-radius: 10px;
 
         .symbol-contain{
           position: absolute;
@@ -336,7 +343,7 @@ button{
         }
 
         .box{
-          box-shadow: 2px 2px 5px var(--dark);
+          box-shadow: var(--shadow);
           cursor: pointer;
           width: 100%;
           display: block;
@@ -448,6 +455,9 @@ button{
         flex: 1 1 15rem;
         border: solid 2px transparent;
         position: relative;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
 
         .symbol-contain{
           position: absolute;

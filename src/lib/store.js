@@ -1,5 +1,6 @@
 import { writable, get, derived } from 'svelte/store'
 import { onMount } from 'svelte'
+import { goto } from '$app/navigation'
 
 
 export let materialArrs = writable([
@@ -219,6 +220,8 @@ export const allDone = derived(
 		$materials.materials.filter((m) => m.done === true).length === $materials.materials.length
 );
 
+export const getCosts = derived(materials, ($materials) => $materials.materials.filter((m) => m.totalCost > 0));
+
 //functions 
 async function setVersion() {
 	const newVersion = Math.round(Math.random() * 1);
@@ -226,6 +229,19 @@ async function setVersion() {
 
 	version.set(newVersion)
 	materials.set(allMaterials[newVersion]);
+}
+
+export function resetAll() {
+	materials.update(materials => {
+		materials.materials.forEach(material => {
+			material.done = false
+		});
+	})
+	
+	version.update(v => v === 0 ? 1 : 0)
+	const allMaterials = get(materialArrs)
+	materials.set(allMaterials[get(version)])
+	goto('/')
 }
 
 setVersion()
