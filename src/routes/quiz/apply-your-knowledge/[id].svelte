@@ -28,7 +28,7 @@ export async function load({ page }){
 
 
 	$: material = $materials.materials.filter(m => m.id == id)[0]
-	$: jgOffset = answerString.length
+	$: jgOffset = [...answerString].filter(a => a !== '.').length
 
 	function handleHeatUp() {
 		heated = true;
@@ -252,7 +252,7 @@ export async function load({ page }){
 
 			.appender{
 				font-size: 2rem;
-				padding: 1rem;
+				padding: 1rem .5rem;
 				position: absolute;
 				left: 1rem;
 				top: 0;
